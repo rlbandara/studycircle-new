@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" role="img" aria-label="Questions and answers">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0057B8"/><stop offset="1" stop-color="#0B0F14"/></linearGradient></defs>
+  <rect width="480" height="200" fill="url(#g)"/>
+  <circle cx="420" cy="20" r="110" fill="#fff" opacity=".08"/>
+  <circle cx="40" cy="190" r="90" fill="#fff" opacity=".07"/>
+  <g transform="translate(120 40)"><rect x="0" y="0" width="170" height="68" rx="34" fill="#fff"/><text x="85" y="46" text-anchor="middle" font-family="Arial" font-weight="700" font-size="38" fill="#0057B8">?</text><rect x="110" y="84" width="140" height="56" rx="28" fill="#00A651"/><path d="M146 112l14 14 28-28" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>
