@@ -7,7 +7,7 @@ define('DB_HOST', 'localhost');
 define('DB_NAME', 'studycircle_db');
 define('DB_USER', 'root');
 define('DB_PASS', '');            // XAMPP default is empty
-define('BASE_URL', '/studycircle'); // use '' when the site sits at the domain root (live hosting)
+define('BASE_URL', '/studycircle-new'); // use '' when the site sits at the domain root (live hosting)
 define('UPLOAD_DIR', __DIR__ . '/../uploads/'); // where uploaded notes are stored
 define('MAX_UPLOAD_MB', 10);
 
