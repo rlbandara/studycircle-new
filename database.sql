@@ -22,13 +22,17 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Tables
 -- ---------------------------------------------------------------------
 CREATE TABLE users (
-  id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  name        VARCHAR(100) NOT NULL,
-  email       VARCHAR(150) NOT NULL UNIQUE,
-  password    VARCHAR(255) NOT NULL,                       -- password_hash() value
-  role        ENUM('student','admin') NOT NULL DEFAULT 'student',
-  status      ENUM('active','inactive') NOT NULL DEFAULT 'active',
-  created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    gender ENUM('female','male') DEFAULT NULL,
+    role ENUM('student','admin') NOT NULL DEFAULT 'student',
+    status ENUM('active','inactive') NOT NULL DEFAULT 'active',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    profile_image VARCHAR(255) DEFAULT NULL,
+    personal_goal VARCHAR(255) DEFAULT NULL,
+    login_count INT UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
 CREATE TABLE subjects (

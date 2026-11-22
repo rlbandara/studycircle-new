@@ -54,7 +54,7 @@ include __DIR__ . '/includes/header.php';
         </div>
       </div>
       <div class="col-lg-6">
-        <img class="hero-media" src="<?= url('assets/img/hero-study.svg') ?>" width="640" height="480" alt="Students sharing notes and studying together">
+       <img class="hero-media" src="<?= url('assets/img/hero-students.png') ?>" width="640" height="480" alt="Students studying together">
       </div>
     </div>
   </div>

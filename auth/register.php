@@ -14,6 +14,7 @@ $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name     = trim($_POST['name'] ?? '');
     $email    = trim($_POST['email'] ?? '');
+    $gender = $_POST['gender'] ?? '';
     $password = $_POST['password'] ?? '';
     $confirm  = $_POST['confirm'] ?? '';
 
@@ -24,6 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 150) {
         $errors['email'] = 'Enter a valid email address.';
     }
+
+if (!in_array($gender, ['female', 'male'], true)) {
+    $errors['gender'] = 'Please select a valid gender.';
+}
+
+
     if (strlen($password) < 8 || !preg_match('/[A-Za-z]/', $password) || !preg_match('/\d/', $password)) {
         $errors['password'] = 'Use at least 8 characters, with a letter and a number.';
     }
@@ -43,8 +50,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ----- Save -----
     if (!$errors) {
         try {
-            $stmt = $pdo->prepare('INSERT INTO users (name, email, password, role, status) VALUES (?, ?, ?, ?, ?)');
-            $stmt->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), 'student', 'active']);
+
+$stmt = $pdo->prepare(
+    'INSERT INTO users (name, email, gender, password, role, status)
+     VALUES (?, ?, ?, ?, ?, ?)'
+);
+
+$stmt->execute([
+    $name,
+    $email,
+    $gender,
+    password_hash($password, PASSWORD_DEFAULT),
+    'student',
+    'active'
+]);
+
 
             set_flash('success', 'Account created. You can log in now.');
             header('Location: ' . url('auth/login.php'));
@@ -81,7 +101,12 @@ function field_error(array $errors, string $key): void
       <span class="auth-chip">Answer questions</span>
       <span class="auth-chip">Plan study sessions</span>
     </div>
-    <img class="auth-illustration" src="<?= url('assets/img/hero-study.svg') ?>" alt="" width="440" height="330">
+
+    <img
+    class="auth-graduates"
+    src="<?= url('assets/img/graduates.png') ?>"
+    alt="NSBM University Graduates">
+
   </section>
 
   <section class="auth-main">
@@ -108,6 +133,18 @@ function field_error(array $errors, string $key): void
                placeholder="you@students.nsbm.ac.lk" autocomplete="email" maxlength="150" required<?= isset($errors['email']) ? ' aria-invalid="true" aria-describedby="email-error"' : '' ?>>
         <?php field_error($errors, 'email'); ?>
       </div>
+
+
+      <div>
+        <label class="form-label" for="gender">Gender</label>
+        <select class="form-control" id="gender" name="gender" required>
+          <option value="">Select your gender</option>
+          <option value="female" <?= ($_POST['gender'] ?? '') === 'female' ? 'selected' : '' ?>>Female</option>
+          <option value="male" <?= ($_POST['gender'] ?? '') === 'male' ? 'selected' : '' ?>>Male</option>
+        </select>
+        <?php field_error($errors, 'gender'); ?>
+      </div>
+
 
       <div>
         <label class="form-label" for="password">Password</label>
