@@ -278,8 +278,8 @@ form.card-sc:hover, .auth-card:hover { transform: none; box-shadow: var(--shadow
 }
 
 /* ---------- Logo image + campus photo (watermark) ---------- */
-.sc-logo-img { height: 58px; width: auto; max-width: 240px; object-fit: contain; background: #fff; border-radius: 14px; padding: 6px 12px; box-shadow: 0 6px 18px rgba(0, 0, 0, .25); image-rendering: auto; -webkit-font-smoothing: antialiased; }
-.sc-brand-light .sc-logo-img { height: 46px; }
+.sc-logo-img { height: 42px; width: auto; max-width: 150px; object-fit: contain; background: #fff; border-radius: 10px; padding: 4px 8px; box-shadow: 0 0 0 2px rgba(0, 166, 81, .35); }
+.sc-brand-light .sc-logo-img { height: 38px; }
 
 /* Home hero: campus photo sits under the dark gradient */
 .landing-hero.has-campus {
@@ -344,4 +344,299 @@ form[role="search"].card-sc .btn-sc { box-shadow: none; }
 @media (max-width: 767px) {
   .hero-banner { flex-direction: column; align-items: flex-start; }
   .hero-banner-img { height: 150px; align-self: center; margin-bottom: -4px; }
+}
+
+
+/* ===== NSBM Graduates - Refined Design ===== */
+
+.auth-side {
+    position: relative;
+    overflow: hidden;
+    justify-content: flex-start;
+    padding-bottom: 0;
+    isolation: isolate;
+}
+
+/* Graduates image */
+.auth-side .auth-graduates {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 95%;
+    max-width: 850px;
+    height: auto;
+
+    object-fit: contain;
+    object-position: bottom right;
+
+    z-index: 1;
+    pointer-events: none;
+
+    /* Soft, natural shadow */
+    filter: drop-shadow(0 12px 22px rgba(0, 8, 25, 0.35));
+}
+
+/* Keep headings and buttons above image */
+.auth-side h1,
+.auth-side p,
+.auth-side .auth-chips,
+.auth-side .sc-brand {
+    position: relative;
+    z-index: 2;
+}
+
+/* Subtle background glow */
+.auth-side::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    right: -100px;
+    bottom: -150px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(0, 166, 81, 0.20),
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Tablet and mobile */
+@media (max-width: 991px) {
+    .auth-side {
+        padding: 40px 24px 0;
+        min-height: 650px;
+    }
+
+    .auth-side .auth-graduates {
+        width: 90%;
+        max-width: 550px;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .auth-side {
+        min-height: 620px;
+    }
+
+    .auth-side .auth-graduates {
+        width: 100%;
+        max-width: 430px;
+    }
+}
+
+/* Graduates final position adjustment */
+
+.auth-side .auth-graduates {
+    right: 0;
+    bottom: -35px;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    filter: drop-shadow(
+        0 8px 18px rgba(0, 15, 35, 0.35)
+    );
+}
+
+/* ===== Graduates Alignment Fix ===== */
+
+.auth-side .auth-graduates {
+    position: absolute;
+
+    /* Move image to bottom-right */
+    right: -12px;
+    bottom: -12px;
+
+    /* Reduce image size */
+    width: 72%;
+    max-width: 650px;
+    height: auto;
+
+    /* Keep natural proportions */
+    object-fit: contain;
+    object-position: bottom right;
+
+    /* Soft realistic shadow */
+    filter: drop-shadow(
+        0 10px 18px rgba(0, 10, 30, 0.30)
+    );
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Small screens */
+@media (max-width: 991px) {
+    .auth-side .auth-graduates {
+        width: 65%;
+        max-width: 450px;
+        right: -10px;
+        bottom: -10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .auth-side .auth-graduates {
+        width: 75%;
+        max-width: 330px;
+        right: -8px;
+        bottom: -8px;
+    }
+}
+
+
+/* Highlighted Personal Study Goal Card */
+.study-goal-card {
+  width: 100%;
+  max-width: 350px;
+  padding: 16px 20px;
+  color: #ffffff;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(0, 200, 120, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18),
+              0 0 18px rgba(0, 200, 120, 0.12);
+  backdrop-filter: blur(8px);
+  overflow-wrap: anywhere;
+}
+
+.study-goal-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #4fffb0;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.study-goal-card div {
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Circular Student Profile Photo */
+.student-profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 4px solid #00A651;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  display: block;
+}
+
+/* Compact Student Dashboard Banner */
+.hero-banner {
+  padding: 20px 28px;
+  gap: 24px;
+}
+
+.hero-banner-text {
+  flex: 1 1 280px;
+}
+
+.hero-banner > .d-flex {
+  flex: 0 1 360px;
+  margin-left: auto;
+}
+
+.hero-banner .student-profile-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.hero-banner .study-goal-card {
+  padding: 12px 16px;
+  margin-top: 12px !important;
+}
+
+@media (max-width: 767px) {
+  .hero-banner {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .hero-banner > .d-flex {
+    margin: 0 auto;
+    flex-basis: 100%;
+  }
+
+  .hero-banner-text {
+    flex-basis: 100%;
+  }
+}
+
+
+/* Student Profile - Balanced Grid Layout */
+@media (min-width: 992px) {
+  .profile-content-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .profile-content-grid > .profile-grid-item {
+    min-width: 0;
+  }
+}
+
+
+/* Student Profile - Two Column Layout */
+.profile-content-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 24px;
+  align-items: start;
+  margin: 0;
+}
+
+.profile-left-column,
+.profile-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+@media (max-width: 991px) {
+  .profile-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Admin Users - Compact Add User Form */
+@media (min-width: 768px) {
+    .admin-add-user-form {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px 24px !important;
+    }
+
+    .admin-add-user-form > h2,
+    .admin-add-user-form > input[type="hidden"] {
+        grid-column: 1 / -1;
+    }
+
+    .admin-add-user-form > div:last-child {
+        grid-column: 1 / -1;
+    }
 }

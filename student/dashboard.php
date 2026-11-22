@@ -4,6 +4,23 @@ require_once __DIR__ . '/../includes/auth_check.php';
 
 $userId = (int)$_SESSION['user_id'];
 
+
+
+// ----- Student profile details -----
+
+$stmt = $pdo->prepare(
+    'SELECT personal_goal, profile_image, gender FROM users WHERE id = ?'
+);
+$stmt->execute([$userId]);
+
+$userProfile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$personalGoal = $userProfile['personal_goal'] ?? '';
+$profileImage = $userProfile['profile_image'] ?? '';
+$gender = $userProfile['gender'] ?? '';
+error_log('StudyCircle dashboard gender: ' . var_export($gender, true));
+
+
 // ----- Stat cards -----
 $stmt = $pdo->prepare('SELECT COUNT(*) FROM materials WHERE user_id = ?');
 $stmt->execute([$userId]);
@@ -49,14 +66,77 @@ $pageTitle = 'Dashboard';
 $layout    = 'student';
 include __DIR__ . '/../includes/header.php';
 ?>
+
+
+
 <div class="hero-banner">
+
   <div class="hero-banner-text">
-    <h1>Welcome back, <?= e($firstName) ?></h1>
-    <div class="mb-3">Share a note today and help your batch.</div>
-    <a class="btn-sc-outline" href="<?= url('student/material_form.php') ?>">Upload material</a>
+
+<?php if (!empty($_SESSION['first_login'])): ?>
+  <h1>Welcome to StudyCircle, <?= e($firstName) ?>! 🎉</h1>
+<?php else: ?>
+  <h1>Welcome back, <?= e($firstName) ?>! 👋</h1>
+<?php endif; ?>
+
+
+    <div class="mb-3">
+      Share a note today and help your batch.
+    </div>
+
+    <a class="btn-sc-outline"
+       href="<?= url('student/material_form.php') ?>">
+      Upload material
+    </a>
   </div>
-  <img class="hero-banner-img" src="<?= url('assets/img/student-study.svg') ?>" width="360" height="250" alt="A child studying at a desk">
+
+  <div class="d-flex flex-column align-items-center text-center"
+       style="max-width: 360px; width: 100%;">
+
+
+
+
+
+<?php
+// Choose the default image based on the selected gender.
+$defaultImage = match ($gender) {
+    'female' => 'assets/img/graduate-girl.png',
+    'male'   => 'assets/img/graduate-boy.png',
+    default  => null
+};
+
+$photoUrl = !empty($profileImage)
+    ? url('student/profile_photo.php')
+    : ($defaultImage !== null ? url($defaultImage) : null);
+?>
+
+<?php if ($photoUrl !== null): ?>
+  <img
+    class="student-profile-photo"
+    src="<?= e($photoUrl) ?>"
+    width="150"
+    height="150"
+    alt="Student profile picture"
+  >
+<?php endif; ?>
+
+
+
+
+    <div class="mt-3 study-goal-card">
+      <?php if (!empty($personalGoal)): ?>
+        <strong>🎯 My Study Goal</strong>
+        <div><?= e($personalGoal) ?></div>
+      <?php else: ?>
+        <span>Stay focused. Keep learning.</span>
+      <?php endif; ?>
+    </div>
+
+  </div>
 </div>
+
+
+
 
 <div class="row g-3 mb-4">
   <?php

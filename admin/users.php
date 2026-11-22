@@ -74,8 +74,8 @@ include __DIR__ . '/../includes/header.php';
 ?>
 <div class="page-head"><h1>Users</h1></div>
 <div class="row g-4">
-  <div class="col-xl-4">
-    <form class="card-sc d-flex flex-column gap-3" method="post" action="" novalidate>
+  <div class="col-12">
+    <form class="card-sc d-flex flex-column gap-3 admin-add-user-form" method="post" action="" novalidate>
       <h2 class="section-title mb-0">Add a user</h2>
       <?= csrf_field() ?><input type="hidden" name="action" value="add">
       <div><label class="form-label" for="name">Name</label>
@@ -93,7 +93,7 @@ include __DIR__ . '/../includes/header.php';
     </form>
   </div>
 
-  <div class="col-xl-8">
+  <div class="col-12">
     <form class="card-sc d-flex gap-2 mb-3" method="get" action="" role="search">
       <label class="visually-hidden" for="q">Search users</label>
       <input class="form-control" type="search" id="q" name="q" value="<?= e($q) ?>" placeholder="Search by name or email">
