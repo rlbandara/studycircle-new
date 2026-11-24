@@ -28,6 +28,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($user['status'] !== 'active') {
             $error = 'Your account is inactive. Please contact the administrator.';
         } else {
+            
+$stmt = $pdo->prepare(
+    'UPDATE users SET login_count = login_count + 1 WHERE id = ?'
+);
+$stmt->execute([(int)$user['id']]);
+
+$_SESSION['first_login'] = false;
+
+if ($stmt->rowCount() === 1) {
+    $countStmt = $pdo->prepare(
+        'SELECT login_count FROM users WHERE id = ?'
+    );
+    $countStmt->execute([(int)$user['id']]);
+
+    $_SESSION['first_login'] = ((int)$countStmt->fetchColumn() === 1);
+}
+
             session_regenerate_id(true);                // stops session fixation
             $_SESSION['user_id'] = (int)$user['id'];
             $_SESSION['name']    = $user['name'];
@@ -54,7 +71,11 @@ include __DIR__ . '/../includes/header.php';
       <span class="auth-chip">Ask questions</span>
       <span class="auth-chip">Join study groups</span>
     </div>
-    <img class="auth-illustration" src="<?= url('assets/img/hero-study.svg') ?>" alt="" width="440" height="330">
+    <img
+    class="auth-graduates"
+    src="<?= url('assets/img/graduates.png') ?>"
+    alt="University graduates">
+
   </section>
 
   <section class="auth-main">
