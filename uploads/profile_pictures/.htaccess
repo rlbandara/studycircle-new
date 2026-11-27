@@ -1,0 +1,8 @@
+
+# Prevent PHP scripts from running in this folder
+<FilesMatch "\.(php|phtml|phar|php[0-9])$">
+    Require all denied
+</FilesMatch>
+
+# Disable directory listing
+Options -Indexes

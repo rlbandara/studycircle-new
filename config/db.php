@@ -4,16 +4,16 @@
 // (commit a db.example.php and list db.php in .gitignore).
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'studycircle_db');
+define('DB_NAME', 'studycircle_dev_db');
 define('DB_USER', 'root');
 define('DB_PASS', '');            // XAMPP default is empty
-define('BASE_URL', '/studycircle-new'); // use '' when the site sits at the domain root (live hosting)
+define('BASE_URL', '/StudyCircle-Latest');
 define('UPLOAD_DIR', __DIR__ . '/../uploads/'); // where uploaded notes are stored
 define('MAX_UPLOAD_MB', 10);
 
 try {
     $pdo = new PDO(
-        'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+       'mysql:host=' . DB_HOST . ';port=3306;dbname=' . DB_NAME . ';charset=utf8mb4',
         DB_USER,
         DB_PASS,
         [

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $action = $_POST['action'] ?? '';
 
-
+    
 
 if ($action === 'profile') {
     $nameValue = trim($_POST['name'] ?? '');
@@ -69,7 +69,7 @@ if ($action === 'profile') {
             header('Location: ' . url('student/profile.php'));
             exit;
         }
-
+    
 } elseif ($action === 'photo') {
 
     $photo = $_FILES['profile_photo'] ?? null;
@@ -280,7 +280,7 @@ include __DIR__ . '/../includes/header.php';
 
 
 
-
+    
   </div>
 
   <div class="profile-right-column">
@@ -300,7 +300,7 @@ include __DIR__ . '/../includes/header.php';
           <span class="list-row-meta"><?= e(date('j M Y', strtotime($r['created_at']))) ?></span></div>
       <?php endforeach; ?>
     </section>
-
+    
     <form class="card-sc d-flex flex-column gap-3" method="post" action="" novalidate>
       <h2 class="section-title mb-0">Change password</h2>
       <?= csrf_field() ?><input type="hidden" name="action" value="password">
@@ -314,4 +314,4 @@ include __DIR__ . '/../includes/header.php';
     </form>
   </div>
 </div>
-<?php include __DIR__ . '/../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>    

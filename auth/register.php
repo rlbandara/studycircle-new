@@ -50,7 +50,7 @@ if (!in_array($gender, ['female', 'male'], true)) {
     // ----- Save -----
     if (!$errors) {
         try {
-
+            
 $stmt = $pdo->prepare(
     'INSERT INTO users (name, email, gender, password, role, status)
      VALUES (?, ?, ?, ?, ?, ?)'
@@ -101,7 +101,7 @@ function field_error(array $errors, string $key): void
       <span class="auth-chip">Answer questions</span>
       <span class="auth-chip">Plan study sessions</span>
     </div>
-
+    
     <img
     class="auth-graduates"
     src="<?= url('assets/img/graduates.png') ?>"
